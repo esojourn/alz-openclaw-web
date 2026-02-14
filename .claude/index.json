@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-02-14T00:00:00.000Z",
+  "version": 1,
+  "root": {
+    "claudeMd": "CLAUDE.md",
+    "language": "HTML/CSS/JS",
+    "type": "static-landing-page"
+  },
+  "modules": [],
+  "scan": {
+    "totalFiles": 15,
+    "scannedFiles": 4,
+    "coveragePercent": 100,
+    "note": "二进制文件(mp4)和Zone.Identifier标记文件仅记录路径不读取内容，模板文件已扫描。实际有意义的源文件(index.html, spec.md)已全部覆盖。",
+    "skippedPaths": [
+      { "path": "videos/hero_bg.mp4", "reason": "二进制视频文件" },
+      { "path": "videos/hero_loop.mp4", "reason": "二进制视频文件" },
+      { "path": "*.Zone.Identifier", "reason": "Windows/WSL下载标记文件" }
+    ],
+    "truncated": false
+  },
+  "gaps": [],
+  "entryPoints": ["index.html"],
+  "importantPaths": {
+    "entry": ["index.html"],
+    "spec": ["spec.md"],
+    "assets": ["videos/hero_bg.mp4", "videos/hero_loop.mp4"],
+    "templates": [".spec-workflow/templates/"]
+  }
+}
