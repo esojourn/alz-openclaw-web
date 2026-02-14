@@ -389,6 +389,12 @@
             margin-top: 4px;
         }
 
+        .pricing-note span {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--accent-orange);            
+        }
+
         .pricing-features {
             list-style: none;
             margin-bottom: 32px;
@@ -1061,7 +1067,7 @@
                     <h3 class="pricing-name">实用版</h3>
                     <p class="pricing-desc">体验顶级模型的强大能力</p>
                     <div class="pricing-price">
-                        <div class="pricing-amount">58<span>元/周</span></div>
+                        <div class="pricing-amount">58<span>元/2周</span></div>
                     </div>
                     <ul class="pricing-features">
                         <li>
@@ -1086,7 +1092,7 @@
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M20 6L9 17l-5-5"/>
                             </svg>
-                            <strong>1天 Opus $200额度</strong>
+                            <strong>含1天 Opus $200额度试用 *</strong>
                         </li>
                         <li>
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1103,7 +1109,7 @@
                     <p class="pricing-desc">长期使用的最佳性价比</p>
                     <div class="pricing-price">
                         <div class="pricing-amount">98<span>元/首月</span></div>
-                        <p class="pricing-note">续费仅需 58元/月</p>
+                        <p class="pricing-note">续费仅需 <span>58</span>元/月</p>
                     </div>
                     <ul class="pricing-features">
                         <li>
@@ -1122,7 +1128,13 @@
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M20 6L9 17l-5-5"/>
                             </svg>
-                            <strong>1天 Opus $200额度</strong>
+                            <strong>含1天 Opus $200额度试用 *</strong>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 6L9 17l-5-5"/>
+                            </svg>
+                            <strong>首月含￥30元大模型额度 *</strong>
                         </li>
                         <li>
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1130,18 +1142,14 @@
                             </svg>
                             版本持续更新
                         </li>
-                        <li>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M20 6L9 17l-5-5"/>
-                            </svg>
-                            Opus额度可单独续费
-                        </li>
                     </ul>
                     <a href="#contact" class="pricing-cta">立即购买</a>
                 </div>
             </div>
             <div class="pricing-extra fade-in">
-                额度充值可选购：额度包30元起，优惠费率提供国际一线大模型。<a role="button" tabindex="0" onclick="openPriceModal()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPriceModal();}">查看详情</a>
+                <p>* Opus套餐 / 大模型按量计费可单独续费</p>
+                <p>按量计费额度包30元起，优惠费率提供国际一线大模型。</p>
+                <p><a role="button" tabindex="0" onclick="openPriceModal()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPriceModal();}">查看详情</a></p>
             </div>
         </div>
     </section>
@@ -1363,7 +1371,7 @@
     <div class="modal-overlay" id="priceModal" role="dialog" aria-modal="true" aria-labelledby="priceModalTitle">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="priceModalTitle">模型价格表</h3>
+                <h3 class="modal-title" id="priceModalTitle">按量计费模型价格表</h3>
                 <button class="modal-close" onclick="closePriceModal()" aria-label="关闭价格表">&times;</button>
             </div>
             <div class="modal-body">
