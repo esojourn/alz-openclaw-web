@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常见问题 — OpenClaw租用 - Alz 阿兹</title>
+    <meta name="description" content="OpenClaw租用常见问题解答。了解什么是OpenClaw、支持哪些平台和模型、如何使用对话命令、隐私安全等。">
+    <meta name="keywords" content="OpenClaw,FAQ,常见问题,AI助理,使用教程,Alz阿兹">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Alz阿兹">
+    <meta name="theme-color" content="#00FF88">
+    <link rel="canonical" href="https://openclaw.alz-ai.cn/faq.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+/* FAQ Page Specific Styles */
+.faq-hero {
+    padding: 160px 24px 80px;
+    text-align: center;
+    background: var(--bg-primary);
+    position: relative;
+    overflow: hidden;
+}
+.faq-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at center, rgba(0,255,136,0.04) 0%, transparent 60%);
+    pointer-events: none;
+}
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 32px;
+    transition: opacity 0.3s;
+    position: relative;
+    z-index: 1;
+}
+.back-link:hover { opacity: 0.7; }
+.back-link svg { width: 16px; height: 16px; }
+
+.faq-hero .section-title { position: relative; z-index: 1; }
+.faq-hero .section-desc { position: relative; z-index: 1; }
+
+/* FAQ Category */
+.faq-section { background: var(--bg-primary); padding: 0 24px 80px; }
+.faq-container { max-width: 860px; margin: 0 auto; }
+
+.faq-category {
+    margin-bottom: 48px;
+}
+.faq-category-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--accent);
+}
+.faq-category-icon {
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--accent-dim);
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+.faq-category-icon svg { width: 20px; height: 20px; color: var(--accent); }
+/* Accordion Item */
+.faq-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+}
+.faq-item:hover { border-color: rgba(0,255,136,0.3); }
+.faq-item.active { border-color: var(--accent); }
+
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    padding: 20px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    font-family: inherit;
+    line-height: 1.5;
+}
+.faq-question:hover { color: var(--accent); }
+
+.faq-arrow {
+    width: 20px; height: 20px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    color: var(--text-secondary);
+}
+.faq-item.active .faq-arrow { transform: rotate(180deg); color: var(--accent); }
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+}
+.faq-answer-inner {
+    padding: 0 24px 20px;
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+.faq-answer-inner code {
+    background: var(--bg-secondary);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: var(--accent);
+    font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.faq-answer-inner ul {
+    margin: 8px 0;
+    padding-left: 20px;
+}
+.faq-answer-inner li {
+    margin-bottom: 6px;
+}
+.faq-answer-inner a {
+    color: var(--accent);
+    text-decoration: underline;
+    transition: opacity 0.3s;
+}
+.faq-answer-inner a:hover { opacity: 0.7; }
+
+/* Command Table */
+.cmd-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 14px;
+}
+.cmd-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+}
+.cmd-table td:first-child {
+    white-space: nowrap;
+    width: 160px;
+}
+.cmd-table tr:last-child td { border-bottom: none; }
+
+/* CTA Banner */
+.faq-cta {
+    background: var(--bg-secondary);
+    padding: 80px 24px;
+    text-align: center;
+}
+.faq-cta-box {
+    max-width: 600px;
+    margin: 0 auto;
+}
+.faq-cta-box .cta-button { margin-top: 24px; }
+
+/* Fade-in for FAQ items */
+.faq-item.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s;
+}
+.faq-item.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="faq-hero">
+        <a href="index.html" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            返回首页
+        </a>
+        <div class="section-header" style="margin-bottom:0">
+            <span class="section-tag">FAQ</span>
+            <h1 class="section-title">常见问题</h1>
+            <p class="section-desc">关于 OpenClaw 和我们的租用服务，你可能想知道的一切</p>
+        </div>
+    </section>
+
+    <main class="faq-section">
+        <div class="faq-container">
+
+            <!-- Category 1: 基础认知 -->
+            <div class="faq-category fade-in">
+                <h2 class="faq-category-title">
+                    <span class="faq-category-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5"/></svg></span>
+                    基础认知
+                </h2>
+
+                <div class="faq-item fade-in">
+                    <button class="faq-question" aria-expanded="false">
+                        什么是 OpenClaw？
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        OpenClaw 是一个开源的个人 AI 助理网关，可以将你常用的聊天应用（WhatsApp、Telegram、Discord、iMessage 等）连接到 AI 编程代理。你只需在自己的设备或服务器上运行一个 Gateway 进程，它就成为你的消息应用和 AI 助手之间的桥梁。项目在 GitHub 上拥有超过 19 万 Star，采用 MIT 开源协议。
+                    </div></div>
+                </div>
+
+                <div class="faq-item fade-in">
+                    <button class="faq-question" aria-expanded="false">
+                        OpenClaw 适合什么人使用？
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        OpenClaw 适合希望拥有个人 AI 助理、同时保持数据隐私的用户。无论你是开发者需要编程辅助，还是普通用户想在微信、Telegram 等平台上随时获得 AI 帮助，OpenClaw 都能满足需求。通过我们的租用服务，即使没有技术背景也能轻松上手。
+                    </div></div>
+                </div>
+
+                <div class="faq-item fade-in">
+                    <button class="faq-question" aria-expanded="false">
+                        OpenClaw租用 和自己部署有什么区别？
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        自己部署需要准备服务器、安装 Node.js 22+ 环境、配置网络和安全策略，整个过程对新手来说可能需要数小时甚至更久。而 OpenClaw租用 提供预装好一切的独立 VPS，你收到账号后 5 分钟即可开始使用，我们还会持续跟进版本更新，省去维护烦恼。
+                    </div></div>
+                </div>
+            </div>
+            <!-- Category 2: 功能与平台 -->
+            <div class="faq-category fade-in">
+                <h2 class="faq-category-title">
+                    <span class="faq-category-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
+                    功能与平台
+                </h2>
+
+                <div class="faq-item fade-in">
+                    <button class="faq-question" aria-expanded="false">
+                        OpenClaw 支持哪些聊天平台？
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        OpenClaw 支持非常广泛的消息平台：
+                        <ul>
+                            <li>WhatsApp、Telegram、Discord、Slack</li>
+                            <li>Google Chat、Signal、Microsoft Teams</li>
+                            <li>iMessage（通过 BlueBubbles）、Matrix</li>
+                            <li>WebChat（浏览器直接访问）</li>
+                            <li>macOS / iOS / Android 原生应用</li>
+                        </ul>
+                        一个 Gateway 可以同时服务所有已连接的平台。
+                    </div></div>
+                </div>
+
+                <div class="faq-item fade-in">
+                    <button class="faq-question" aria-expanded="false">
+                        支持哪些 AI 模型？
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        OpenClaw 不绑定特定模型提供商，支持通过配置自由切换模型。目前可用的模型包括：
+                        <ul>
+                            <li>Claude Opus 4.6 / Sonnet 4.5（Anthropic，官方推荐）</li>
+                            <li>GPT-5 / GPT-4o（OpenAI）</li>
+                            <li>DeepSeek R1 / V3.1</li>
+                            <li>Grok 4（xAI）</li>
+                            <li>Gemini 3 Pro / Flash（Google）</li>
+                        </ul>
+                        我们的租用服务默认提供 OpenRouter 免费模型，也可另购额度使用顶级商业模型。
+                    </div></div>
+                </div>
+
+                <div class="faq-item fade-in">
+                    <button class="faq-question" aria-expanded="false">
+                        OpenClaw 有哪些核心能力？
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        <ul>
+                            <li>多平台消息收发（文字、图片、音频、文档）</li>
+                            <li>AI 编程代理 — 具备工具调用和代码执行能力</li>
+                            <li>会话管理与记忆 — 支持多会话隔离</li>
+                            <li>语音唤醒与对话模式（Talk Mode）</li>
+                            <li>Live Canvas — AI 驱动的可视化工作区</li>
+                            <li>Skills 技能系统 — 可扩展的插件生态</li>
+                            <li>定时任务（Cron）和 Webhook 集成</li>
+                            <li>浏览器控制 — 通过 CDP 操控 Chrome</li>
+                        </ul>
+                    </div></div>
+                </div>
+
+                <div class="faq-item fade-in">
+                    <button class="faq-question" aria-expanded="false">
+                        什么是 Skills 技能系统？
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        Skills 是 OpenClaw 的插件扩展机制，分为三类：内置技能（Bundled）、托管技能（Managed）和工作区技能（Workspace）。你可以通过 ClawHub 技能注册中心发现和安装社区开发的技能，也可以自己编写技能来扩展 AI 助理的能力，比如自动化工作流、集成第三方服务等。
+                    </div></div>
+                </div>
+            </div>
+
+            <!-- Category 3: 对话中的常用命令 -->
+            <div class="faq-category fade-in">
+                <h2 class="faq-category-title">
+                    <span class="faq-category-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+                    对话中的常用命令
+                </h2>
+
+                <div class="faq-item fade-in">
+                    <button class="faq-question" aria-expanded="false">
+                        在聊天中可以使用哪些命令？
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        在任何已连接的聊天平台中，你可以直接发送以下命令来控制 OpenClaw：
+                        <table class="cmd-table">
+                            <tr><td><code>/status</code></td><td>查看当前会话状态，包括使用的模型、会话时长等</td></tr>
+                            <tr><td><code>/new</code> 或 <code>/reset</code></td><td>重置当前会话，清除上下文记忆，开始全新对话</td></tr>
+                            <tr><td><code>/think &lt;级别&gt;</code></td><td>调整 AI 的思考深度。可选级别：<code>off</code>、<code>minimal</code>、<code>low</code>、<code>medium</code>、<code>high</code>、<code>xhigh</code></td></tr>
+                            <tr><td><code>/verbose on|off</code></td><td>开启或关闭详细输出模式，显示更多 AI 的推理过程</td></tr>
+                            <tr><td><code>/activation mention|always</code></td><td>设置群聊中的激活方式 — <code>mention</code> 需要 @提及才响应，<code>always</code> 始终响应</td></tr>
+                        </table>
+                        这些命令在所有平台（WhatsApp、Telegram、Discord 等）中通用。
+                    </div></div>
+                </div>
+
+                <div class="faq-item fade-in">
+                    <button class="faq-question" aria-expanded="false">
+                        如何让 AI 进行更深入的思考？
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        使用 <code>/think</code> 命令可以调整 AI 的思考深度。例如发送 <code>/think high</code> 会让 AI 在回答前进行更深入的推理，适合复杂问题。日常简单对话可以用 <code>/think off</code> 或 <code>/think minimal</code> 来加快响应速度。思考级别越高，回答质量越好但响应时间也越长。
+                    </div></div>
+                </div>
+
+                <div class="faq-item fade-in">
+                    <button class="faq-question" aria-expanded="false">
+                        可以发送图片、文件给 AI 吗？
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        可以。OpenClaw 支持多媒体消息处理，你可以直接在聊天中发送图片、音频和文档，AI 会理解并处理这些内容。比如发送一张截图让 AI 分析、发送一份代码文件让 AI 审查，或者发送语音消息进行对话。具体的多媒体支持能力取决于你使用的 AI 模型。
+                    </div></div>
+                </div>
+
+                <div class="faq-item fade-in">
+                    <button class="faq-question" aria-expanded="false">
+                        在群聊中如何使用 OpenClaw？
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        OpenClaw 支持群聊模式。默认情况下，在群聊中需要 @提及 OpenClaw 才会触发回复，避免干扰正常聊天。你可以通过 <code>/activation always</code> 切换为始终响应模式，或用 <code>/activation mention</code> 切回提及模式。群聊中的每个会话是隔离的，不会互相干扰。
+                    </div></div>
+                </div>
+            </div>
+
+            <!-- Category 4: 安全与隐私 -->
+            <div class="faq-category fade-in">
+                <h2 class="faq-category-title">
+                    <span class="faq-category-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg></span>
+                    安全与隐私
+                </h2>
+
+                <div class="faq-item fade-in">
+                    <button class="faq-question" aria-expanded="false">
+                        我的数据安全吗？
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        OpenClaw 采用自托管架构，所有数据都存储在你的独立 VPS 上，不经过任何第三方中转服务器。Gateway 默认绑定在本地回环地址（127.0.0.1），外部无法直接访问。你拥有完整的 root 权限，可以随时查看、备份或删除自己的数据。
+                    </div></div>
+                </div>
+
+                <div class="faq-item fade-in">
+                    <button class="faq-question" aria-expanded="false">
+                        如何控制谁可以和我的 AI 对话？
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        OpenClaw 提供多层访问控制：
+                        <ul>
+                            <li>配对模式（Pairing） — 默认开启，陌生人发消息会收到配对码，需要你手动批准</li>
+                            <li>白名单（Allowlist） — 可以指定允许对话的联系人列表</li>
+                            <li>群聊提及要求 — 群聊中可设置必须 @提及 才响应</li>
+                            <li>远程访问认证 — 通过 Tailscale 或密码保护外部访问</li>
+                        </ul>
+                    </div></div>
+                </div>
+
+                <div class="faq-item fade-in">
+                    <button class="faq-question" aria-expanded="false">
+                        对话记录会被保存吗？
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        会话数据存储在你的 VPS 本地，用于维持对话上下文和记忆功能。你可以随时使用 <code>/new</code> 或 <code>/reset</code> 命令清除当前会话。由于是独立 VPS，只有你自己能访问这些数据，我们不会读取或收集你的对话内容。
+                    </div></div>
+                </div>
+            </div>
+
+            <!-- Category 5: 租用服务相关 -->
+            <div class="faq-category fade-in">
+                <h2 class="faq-category-title">
+                    <span class="faq-category-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+                    租用服务相关
+                </h2>
+
+                <div class="faq-item fade-in">
+                    <button class="faq-question" aria-expanded="false">
+                        租用后我会得到什么？
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        你会获得一台预装好 OpenClaw 的独立 VPS（2核2G配置），包含完整的 root 权限。我们会提供 SSH 登录信息和 WebChat 访问地址，你可以立即通过浏览器或连接聊天平台开始使用。体验版还包含 OpenRouter 免费模型额度。
+                    </div></div>
+                </div>
+
+                <div class="faq-item fade-in">
+                    <button class="faq-question" aria-expanded="false">
+                        免费模型和付费模型有什么区别？
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        免费模型通过 OpenRouter 提供，每日有使用限额，且 Agent 能力（工具调用、代码执行等）非常有限，适合简单对话体验。付费模型（如 Claude Opus、GPT-5）拥有更强的推理能力、更长的上下文窗口和完整的 Agent 能力，适合编程辅助、复杂任务等场景。你可以通过我们的按量计费额度包以优惠价格使用顶级模型。
+                    </div></div>
+                </div>
+
+                <div class="faq-item fade-in">
+                    <button class="faq-question" aria-expanded="false">
+                        可以自己配置模型来源吗？
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        当然可以。你拥有完整的 root 权限，可以自由修改 OpenClaw 的配置文件来使用自己的 API Key 和模型提供商。无论是 Anthropic、OpenAI 还是其他兼容的 API 服务，都可以自行接入。我们不会限制你的模型选择自由。
+                    </div></div>
+                </div>
+
+                <div class="faq-item fade-in">
+                    <button class="faq-question" aria-expanded="false">
+                        到期后数据会怎样？
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        到期后 VPS 会保留一段缓冲期（通常 3 天），期间你可以续费或备份数据。缓冲期结束后服务器资源将被回收。建议在到期前做好重要数据的备份。续费后所有数据和配置都会保持不变。
+                    </div></div>
+                </div>
+
+                <div class="faq-item fade-in">
+                    <button class="faq-question" aria-expanded="false">
+                        如何续费或升级套餐？
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        直接通过微信联系我们（微信号：<code>alz-ai</code>）即可续费或升级。长租版续费仅需 58 元/月，是最具性价比的选择。额度包也可以单独续费，30 元起充。
+                    </div></div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- CTA -->
+    <section class="faq-cta">
+        <div class="faq-cta-box fade-in">
+            <span class="section-tag">还有疑问？</span>
+            <h2 class="section-title" style="font-size:clamp(28px,4vw,36px);margin-top:16px">添加微信直接咨询</h2>
+            <p class="section-desc" style="margin:12px auto 0">我们随时为你解答，备注「OpenClaw」即可</p>
+            <a href="index.html#contact" class="cta-button">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                    <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.328.328 0 0 0 .186-.059l2.114-1.225a.866.866 0 0 1 .443-.121.869.869 0 0 1 .246.036 9.928 9.928 0 0 0 2.635.35c4.8 0 8.691-3.287 8.691-7.342s-3.891-7.184-8.691-7.184z"/>
+                </svg>
+                联系我们
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="footer-brand">Alz <span>OpenClaw</span></p>
+            <p class="footer-text">无需搭建，28元即刻开始你的AI助理之旅</p>
+        </div>
+    </footer>
+
+    <script src="common.js"></script>
+    <script>
+    // FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.parentElement;
+            const answer = item.querySelector('.faq-answer');
+            const isActive = item.classList.contains('active');
+
+            // Close all others in same category
+            item.closest('.faq-category').querySelectorAll('.faq-item.active').forEach(other => {
+                if (other !== item) {
+                    other.classList.remove('active');
+                    other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                    other.querySelector('.faq-answer').style.maxHeight = '0';
+                }
+            });
+
+            // Toggle current
+            if (isActive) {
+                item.classList.remove('active');
+                btn.setAttribute('aria-expanded', 'false');
+                answer.style.maxHeight = '0';
+            } else {
+                item.classList.add('active');
+                btn.setAttribute('aria-expanded', 'true');
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+            }
+        });
+    });
+
+    // Stagger fade-in for FAQ items within each category
+    const faqObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const items = entry.target.querySelectorAll('.faq-item.fade-in:not(.visible)');
+                items.forEach((item, i) => {
+                    setTimeout(() => item.classList.add('visible'), i * 80);
+                });
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.faq-category').forEach(cat => faqObserver.observe(cat));
+    </script>
+</body>
+</html>
