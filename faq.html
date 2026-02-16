@@ -188,6 +188,32 @@
     opacity: 1;
     transform: translateY(0);
 }
+
+/* Copy Link Button */
+.faq-item { position: relative; }
+.faq-copy-link {
+    position: absolute;
+    top: 17px;
+    right: 52px;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s, color 0.2s;
+    padding: 4px;
+    z-index: 2;
+    line-height: 0;
+    border-radius: 4px;
+}
+.faq-item:hover .faq-copy-link,
+.faq-copy-link:focus-visible { opacity: 0.5; }
+.faq-copy-link:hover { opacity: 1 !important; color: var(--accent); }
+.faq-copy-link.copied { color: var(--accent); opacity: 1 !important; }
+.faq-item.highlight { border-color: var(--accent); }
+@media (max-width: 768px) {
+    .faq-copy-link { right: 48px; top: 15px; }
+}
     </style>
 </head>
 <body>
@@ -230,7 +256,7 @@
                         <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
                     </button>
                     <div class="faq-answer"><div class="faq-answer-inner">
-                        OpenClaw 适合希望拥有个人 AI 助理、同时保持数据隐私的用户。无论你是开发者需要编程辅助，还是普通用户想在微信、Telegram 等平台上随时获得 AI 帮助，OpenClaw 都能满足需求。通过我们的租用服务，即使没有技术背景也能轻松上手。
+                        OpenClaw 适合希望拥有个人 AI 助理、同时保持数据隐私的用户。无论你是开发者需要编程辅助，还是普通用户想在企业微信、Telegram 等平台上随时获得 AI 帮助，OpenClaw 都能满足需求。通过我们的租用服务，即使没有技术背景也能轻松上手。
                     </div></div>
                 </div>
 
@@ -250,6 +276,33 @@
                     <span class="faq-category-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
                     功能与平台
                 </h2>
+
+                <div class="faq-item fade-in">
+                    <button class="faq-question" aria-expanded="false">
+                        支持哪些国产聊天工具？
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        OpenClaw 通过官方插件和社区生态，已支持多个国产主流平台：
+                        <ul>
+                            <li>飞书（Feishu） — 官方插件，WebSocket 长连接，无需公网 IP，配置简单</li>
+                            <li>钉钉（DingTalk） — 社区插件，支持 Stream API，企业内部机器人、私聊和群聊均可</li>
+                            <li>企业微信（WeCom） — 社区插件可用，支持企业应用接入</li>
+                            <li>不支持个人微信 — 微信官方禁止。如通过第三方插件，容易导致微信帐号被封禁，不建议</li>
+                        </ul>
+                        你可以自行对接上述平台，也可以选择由我们协助配置一个渠道（免费一次）。对接时需要你提供对应平台的 API 密钥。
+                    </div></div>
+                </div>
+
+                <div class="faq-item fade-in">
+                    <button class="faq-question" aria-expanded="false">
+                        是否支持中文界面？
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        支持。目前 OpenClaw 官方代码的界面文字为英文硬编码，暂不提供内置的语言切换功能，社区主导的多语言国际化工作仍在推进中。不过已有第三方独立的中文版本发布，我们英文版和中文版均可安装。下单时请注明你需要的语言版本，我们会为你部署对应版本。
+                    </div></div>
+                </div>
 
                 <div class="faq-item fade-in">
                     <button class="faq-question" aria-expanded="false">
@@ -549,6 +602,52 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.faq-category').forEach(cat => faqObserver.observe(cat));
+
+    // Copy-link buttons & hash auto-open
+    const linkSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>';
+    const checkSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>';
+
+    document.querySelectorAll('.faq-item').forEach((item, i) => {
+        item.id = 'faq-' + (i + 1);
+        const btn = document.createElement('button');
+        btn.className = 'faq-copy-link';
+        btn.title = '复制此问题链接';
+        btn.setAttribute('aria-label', '复制此问题链接');
+        btn.innerHTML = linkSvg;
+        btn.addEventListener('click', e => {
+            e.stopPropagation();
+            const url = location.origin + location.pathname + '#' + item.id;
+            navigator.clipboard.writeText(url).then(() => {
+                btn.classList.add('copied');
+                btn.innerHTML = checkSvg;
+                setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = linkSvg; }, 1500);
+            });
+        });
+        item.insertBefore(btn, item.querySelector('.faq-answer'));
+    });
+
+    // Auto-open question from URL hash
+    function openFromHash() {
+        if (!location.hash) return;
+        const target = document.querySelector(location.hash);
+        if (!target || !target.classList.contains('faq-item')) return;
+        // Ensure visibility (bypass fade-in)
+        target.classList.add('visible');
+        const cat = target.closest('.faq-category');
+        if (cat) cat.querySelectorAll('.faq-item.fade-in').forEach(el => el.classList.add('visible'));
+        // Open accordion
+        target.classList.add('active');
+        target.querySelector('.faq-question').setAttribute('aria-expanded', 'true');
+        const answer = target.querySelector('.faq-answer');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        // Highlight briefly
+        target.classList.add('highlight');
+        setTimeout(() => target.classList.remove('highlight'), 2000);
+        // Scroll into view
+        setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
+    }
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
     </script>
 </body>
 </html>
