@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 咨询与部署服务 — 15年工程经验 · 稳定模型渠道 - Alz 阿兹</title>
+    <title>AI 咨询与部署服务 — 23年起运营AI站点 · 稳定模型渠道 - Alz 阿兹</title>
     <!-- SEO 基础 -->
     <meta name="description" content="专业 AI 咨询与部署服务。OpenClaw咨询，OpenClaw部署服务，15年IT从业经验，提供AI工具部署、架构咨询、定制开发和技术培训。拥有稳定的Anthropic/OpenAI/Google模型渠道。免费咨询，按需定价。">
     <meta name="keywords" content="AI咨询,AI部署,OpenClaw部署,Cursor部署,AI架构咨询,技术培训,Alz阿兹">
@@ -532,6 +532,11 @@
 
                 // 点击涟漪效果
                 card.addEventListener('click', (e) => {
+                    // 如果点击的是链接或按钮，不阻止默认行为
+                    if (e.target.tagName === 'A' || e.target.closest('a')) {
+                        return;
+                    }
+
                     const rect = card.getBoundingClientRect();
                     const x = e.clientX - rect.left;
                     const y = e.clientY - rect.top;
