@@ -5,15 +5,19 @@
 }
 
 :root {
-    --bg-primary: #0D0D0D;
-    --bg-secondary: #1A1A1A;
-    --bg-card: #141414;
-    --accent: #00FF88;
-    --accent-dim: rgba(0, 255, 136, 0.15);
-    --accent-orange: #FF6B35;
-    --text-primary: #FFFFFF;
-    --text-secondary: #A0A0A0;
-    --border: #2A2A2A;
+    --bg-primary: #0f0f0f;
+    --bg-secondary: #1a1a1a;
+    --bg-card: #1a1a1a;
+    --accent: #10b981;
+    --accent-dim: rgba(16, 185, 129, 0.15);
+    --accent-blue: #3b82f6;
+    --accent-gold: #fbbf24;
+    --text-primary: #ffffff;
+    --text-secondary: #d4d4d8;
+    --border: #2a2a2a;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
 html {
@@ -36,27 +40,21 @@ body {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: var(--bg-primary);
+    background: radial-gradient(ellipse at top, #1a1a1a 0%, #0a0a0a 100%);
 }
 
-.hero-video {
+.hero::before {
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    opacity: 0.4;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
     z-index: 1;
-}
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(180deg, rgba(13,13,13,0.3) 0%, rgba(13,13,13,0.8) 100%);
-    z-index: 2;
 }
 
 .hero-content {
@@ -114,7 +112,7 @@ body {
     gap: 12px;
     padding: 18px 40px;
     background: var(--accent);
-    color: var(--bg-primary);
+    color: #000000;
     font-size: 18px;
     font-weight: 700;
     border: none;
@@ -122,12 +120,12 @@ body {
     cursor: pointer;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 0 40px rgba(0, 255, 136, 0.3);
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
 }
 
 .cta-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 60px rgba(0, 255, 136, 0.5);
+    box-shadow: 0 8px 30px rgba(16, 185, 129, 0.5);
 }
 
 .cta-button svg {
@@ -198,6 +196,276 @@ section {
     background: var(--bg-primary);
 }
 
+/* About Section */
+.about {
+    background: var(--bg-secondary);
+}
+
+.about-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.about-intro {
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 48px;
+    text-align: center;
+}
+
+.about-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+}
+
+.stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+}
+
+.stat-number {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.about-highlight {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent-gold);
+    border-radius: 12px;
+    padding: 24px 32px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+.about-highlight strong {
+    color: var(--accent-gold);
+}
+
+/* Services Section (replaces Features) */
+.services {
+    background: var(--bg-primary);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.service-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 32px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.service-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.service-card:hover::before {
+    opacity: 1;
+}
+
+.service-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-dim);
+    border-radius: 14px;
+    margin-bottom: 24px;
+}
+
+.service-icon svg {
+    width: 28px;
+    height: 28px;
+    color: var(--accent);
+}
+
+.service-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.service-desc {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+.service-suitable {
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* Advantages Section */
+.advantages {
+    background: var(--bg-secondary);
+}
+
+.advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.advantage-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px 28px;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-md);
+}
+
+.advantage-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.advantage-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-dim);
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.advantage-icon svg {
+    width: 24px;
+    height: 24px;
+    color: var(--accent);
+}
+
+.advantage-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.advantage-desc {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* Process Section */
+.process {
+    background: var(--bg-primary);
+}
+
+.process-steps {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.process-step {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.process-step:last-child {
+    margin-bottom: 0;
+}
+
+.process-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 23px;
+    top: 56px;
+    width: 2px;
+    height: calc(100% - 16px);
+    background: var(--border);
+}
+
+.process-number {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent);
+    color: #000000;
+    font-size: 20px;
+    font-weight: 800;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+}
+
+.process-content {
+    flex: 1;
+    padding-top: 8px;
+}
+
+.process-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.process-desc {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* Features Section */
+.features {
+    background: var(--bg-primary);
+}
+
 .features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -212,6 +480,7 @@ section {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    box-shadow: var(--shadow-md);
 }
 
 .feature-card::before {
@@ -229,6 +498,7 @@ section {
 .feature-card:hover {
     border-color: var(--accent);
     transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
 }
 
 .feature-card:hover::before {
@@ -284,11 +554,17 @@ section {
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
+    box-shadow: var(--shadow-md);
 }
 
 .pricing-card.featured {
     border-color: var(--accent);
-    box-shadow: 0 0 60px rgba(0, 255, 136, 0.15);
+    box-shadow: 0 10px 40px rgba(16, 185, 129, 0.2);
+}
+
+.pricing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
 }
 
 .pricing-badge {
@@ -322,7 +598,7 @@ section {
 .pricing-amount {
     font-size: 48px;
     font-weight: 800;
-    color: var(--accent-orange);
+    color: var(--accent-blue);
 }
 
 .pricing-amount span {
@@ -340,7 +616,7 @@ section {
 .pricing-note span {
     font-size: 20px;
     font-weight: 500;
-    color: var(--accent-orange);
+    color: var(--accent-blue);
 }
 
 .pricing-features {
@@ -584,7 +860,7 @@ section {
 /* Footer */
 footer {
     background: var(--bg-primary);
-    padding: 40px 24px;
+    padding: 60px 24px 40px;
     text-align: center;
     border-top: 1px solid var(--border);
 }
@@ -592,10 +868,29 @@ footer {
 .footer-brand {
     font-size: 20px;
     font-weight: 700;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
 }
 
 .footer-brand span {
+    color: var(--accent);
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
     color: var(--accent);
 }
 
