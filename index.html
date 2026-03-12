@@ -536,6 +536,12 @@
                     }
                 });
 
+                // 移动端：触摸开始即触发
+                card.addEventListener('touchstart', (e) => {
+                    const touch = e.touches[0];
+                    handleGlowEffect(touch.clientX, touch.clientY);
+                });
+
                 // 移动端：触摸移动
                 card.addEventListener('touchmove', (e) => {
                     const touch = e.touches[0];
