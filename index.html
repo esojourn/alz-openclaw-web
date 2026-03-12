@@ -511,19 +511,39 @@
             const cards = document.querySelectorAll('.stat-card, .service-card, .advantage-card, .pricing-card, .contact-box');
 
             cards.forEach(card => {
-                card.addEventListener('mousemove', (e) => {
+                // 统一的发光效果处理函数
+                const handleGlowEffect = (clientX, clientY) => {
                     const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
+                    const x = clientX - rect.left;
+                    const y = clientY - rect.top;
                     const relativeX = (x / rect.width) * 100;
                     const relativeY = (y / rect.height) * 100;
 
                     card.style.setProperty('--glow-x', `${relativeX}%`);
                     card.style.setProperty('--glow-y', `${relativeY}%`);
                     card.style.setProperty('--glow-intensity', '1');
+                };
+
+                // 桌面端：鼠标移动
+                card.addEventListener('mousemove', (e) => {
+                    handleGlowEffect(e.clientX, e.clientY);
                 });
 
                 card.addEventListener('mouseleave', () => {
+                    // 对于 contact-box 和 featured pricing-card，保持发光效果
+                    if (!card.classList.contains('contact-box') && !card.classList.contains('featured')) {
+                        card.style.setProperty('--glow-intensity', '0');
+                    }
+                });
+
+                // 移动端：触摸移动
+                card.addEventListener('touchmove', (e) => {
+                    e.preventDefault(); // 防止页面滚动
+                    const touch = e.touches[0];
+                    handleGlowEffect(touch.clientX, touch.clientY);
+                }, { passive: false });
+
+                card.addEventListener('touchend', () => {
                     // 对于 contact-box 和 featured pricing-card，保持发光效果
                     if (!card.classList.contains('contact-box') && !card.classList.contains('featured')) {
                         card.style.setProperty('--glow-intensity', '0');
