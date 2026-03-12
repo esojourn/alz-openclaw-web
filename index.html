@@ -538,10 +538,9 @@
 
                 // 移动端：触摸移动
                 card.addEventListener('touchmove', (e) => {
-                    e.preventDefault(); // 防止页面滚动
                     const touch = e.touches[0];
                     handleGlowEffect(touch.clientX, touch.clientY);
-                }, { passive: false });
+                });
 
                 card.addEventListener('touchend', () => {
                     // 对于 contact-box 和 featured pricing-card，保持发光效果
