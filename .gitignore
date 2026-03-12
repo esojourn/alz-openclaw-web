@@ -1,4 +1,7 @@
 *.Zone.Identifier
 .claude/
 .spec-workflow/
+.playwright-mcp/
+videos/hero_loop.mp4:Zone.Identifier
+spec.md:Zone.Identifier
 *.Identifier

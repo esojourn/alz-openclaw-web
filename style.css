@@ -44,22 +44,52 @@ body {
 }
 
 .hero::before {
-    content: '';
+    /* 隐藏原网格背景，Galaxy 效果已包含粒子 */
+    display: none;
+}
+
+/* Galaxy Background Container */
+.galaxy-container {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image:
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 50px 50px;
     z-index: 1;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+}
+
+.galaxy-container.loaded {
+    opacity: 1;
+}
+
+.galaxy-container canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Fallback Background (for non-WebGL browsers) */
+.hero-fallback {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at top, #1a1a1a 0%, #0a0a0a 100%);
+    z-index: 0;
+}
+
+/* Hide fallback when WebGL is supported */
+body.webgl-supported .hero-fallback {
+    opacity: 0;
+    transition: opacity 0.5s ease;
 }
 
 .hero-content {
     position: relative;
-    z-index: 3;
+    z-index: 10;
     text-align: center;
     padding: 0 24px;
     max-width: 1000px;
@@ -228,11 +258,43 @@ section {
     padding: 32px 24px;
     text-align: center;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    --glow-x: 50%;
+    --glow-y: 50%;
+    --glow-intensity: 0;
+}
+
+.stat-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    background: radial-gradient(
+        400px circle at var(--glow-x) var(--glow-y),
+        rgba(16, 185, 129, calc(var(--glow-intensity) * 0.8)) 0%,
+        rgba(16, 185, 129, calc(var(--glow-intensity) * 0.5)) 30%,
+        rgba(16, 185, 129, calc(var(--glow-intensity) * 0.3)) 50%,
+        transparent 70%
+    );
+    border-radius: inherit;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.stat-card:hover::after {
+    opacity: 1;
 }
 
 .stat-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-4px);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(16, 185, 129, 0.4);
 }
 
 .stat-number {
@@ -282,12 +344,41 @@ section {
     position: relative;
     overflow: hidden;
     box-shadow: var(--shadow-md);
+    --glow-x: 50%;
+    --glow-y: 50%;
+    --glow-intensity: 0;
+}
+
+.service-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    background: radial-gradient(
+        500px circle at var(--glow-x) var(--glow-y),
+        rgba(16, 185, 129, calc(var(--glow-intensity) * 0.8)) 0%,
+        rgba(16, 185, 129, calc(var(--glow-intensity) * 0.5)) 30%,
+        rgba(16, 185, 129, calc(var(--glow-intensity) * 0.3)) 50%,
+        transparent 70%
+    );
+    border-radius: inherit;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.service-card:hover::after {
+    opacity: 1;
 }
 
 .service-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(16, 185, 129, 0.4);
 }
 
 .service-icon {
@@ -344,12 +435,43 @@ section {
     padding: 32px 28px;
     transition: all 0.3s ease;
     box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+    --glow-x: 50%;
+    --glow-y: 50%;
+    --glow-intensity: 0;
+}
+
+.advantage-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    background: radial-gradient(
+        450px circle at var(--glow-x) var(--glow-y),
+        rgba(16, 185, 129, calc(var(--glow-intensity) * 0.8)) 0%,
+        rgba(16, 185, 129, calc(var(--glow-intensity) * 0.5)) 30%,
+        rgba(16, 185, 129, calc(var(--glow-intensity) * 0.3)) 50%,
+        transparent 70%
+    );
+    border-radius: inherit;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.advantage-card:hover::after {
+    opacity: 1;
 }
 
 .advantage-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(16, 185, 129, 0.4);
 }
 
 .advantage-icon {
@@ -539,16 +661,61 @@ section {
     display: flex;
     flex-direction: column;
     box-shadow: var(--shadow-md);
+    overflow: visible;
+    --glow-x: 50%;
+    --glow-y: 50%;
+    --glow-intensity: 0;
+}
+
+.pricing-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.pricing-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    background: radial-gradient(
+        500px circle at var(--glow-x) var(--glow-y),
+        rgba(16, 185, 129, calc(var(--glow-intensity) * 0.8)) 0%,
+        rgba(59, 130, 246, calc(var(--glow-intensity) * 0.6)) 30%,
+        rgba(251, 191, 36, calc(var(--glow-intensity) * 0.4)) 50%,
+        transparent 70%
+    );
+    border-radius: inherit;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.pricing-card.featured::after {
+    --glow-intensity: 0.6;
+    opacity: 1;
+}
+
+.pricing-card:hover::after {
+    opacity: 1;
 }
 
 .pricing-card.featured {
-    border-color: var(--accent);
     box-shadow: 0 10px 40px rgba(16, 185, 129, 0.2);
 }
 
 .pricing-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(16, 185, 129, 0.4);
 }
 
 .pricing-badge {
@@ -561,6 +728,7 @@ section {
     font-size: 12px;
     font-weight: 700;
     border-radius: 100px;
+    z-index: 10;
 }
 
 .pricing-name {
@@ -785,6 +953,33 @@ section {
     border: 1px solid var(--border);
     border-radius: 24px;
     padding: 60px 40px;
+    position: relative;
+    overflow: hidden;
+    --glow-x: 50%;
+    --glow-y: 50%;
+    --glow-intensity: 0.8;
+}
+
+.contact-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    background: radial-gradient(
+        600px circle at var(--glow-x) var(--glow-y),
+        rgba(16, 185, 129, calc(var(--glow-intensity) * 0.8)) 0%,
+        rgba(59, 130, 246, calc(var(--glow-intensity) * 0.6)) 30%,
+        rgba(251, 191, 36, calc(var(--glow-intensity) * 0.4)) 50%,
+        transparent 70%
+    );
+    border-radius: inherit;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 1;
+    z-index: 1;
 }
 
 .contact-icon {
@@ -829,6 +1024,18 @@ section {
     font-weight: 700;
     color: var(--accent);
     margin-bottom: 24px;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.wechat-id:hover {
+    background: var(--accent-dim);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+}
+
+.wechat-id:active {
+    transform: translateY(0);
 }
 
 .wechat-id svg {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 咨询与部署服务 — 15年工程经验 · 稳定模型渠道 - Alz 阿兹</title>
+    <title>AI 咨询与部署服务 — 23年起运营AI站点 · 稳定模型渠道 - Alz 阿兹</title>
     <!-- SEO 基础 -->
     <meta name="description" content="专业 AI 咨询与部署服务。OpenClaw咨询，OpenClaw部署服务，15年IT从业经验，提供AI工具部署、架构咨询、定制开发和技术培训。拥有稳定的Anthropic/OpenAI/Google模型渠道。免费咨询，按需定价。">
     <meta name="keywords" content="AI咨询,AI部署,OpenClaw部署,Cursor部署,AI架构咨询,技术培训,Alz阿兹">
@@ -45,6 +45,12 @@
     <!-- Hero Section -->
     <header>
     <section class="hero">
+        <!-- Galaxy Canvas 容器 -->
+        <div id="galaxy-container" class="galaxy-container"></div>
+
+        <!-- 静态背景作为 fallback -->
+        <div class="hero-fallback"></div>
+
         <div class="hero-content">
             <div class="brand">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
@@ -405,11 +411,14 @@
                 </div>
                 <h3 class="contact-title">微信扫码添加</h3>
                 <p class="contact-desc">或搜索微信号直接添加</p>
-                <div class="wechat-id">
+                <div class="wechat-id" id="wechat-id-copy" style="cursor: pointer;" title="点击复制微信号">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 0 1-.023-.156.49.49 0 0 1 .201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-6.656-6.088V8.89c-.135-.01-.27-.027-.407-.03zm-2.53 3.274c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z"/>
                     </svg>
                     alz-ai
+                </div>
+                <div id="copy-toast" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--accent); color: #000; padding: 16px 32px; border-radius: 12px; font-weight: 600; z-index: 10000; box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);">
+                    已复制微信号
                 </div>
                 <p class="contact-note">添加时请备注：AI 咨询</p>
             </div>
@@ -432,6 +441,9 @@
         </div>
     </footer>
 
+    <!-- Galaxy Background -->
+    <script type="module" src="galaxy.js"></script>
+
     <!-- JavaScript -->
     <script>
         // Fade-in animation on scroll
@@ -451,6 +463,120 @@
         document.addEventListener('DOMContentLoaded', () => {
             const fadeElements = document.querySelectorAll('.fade-in');
             fadeElements.forEach(el => observer.observe(el));
+
+            // 微信ID复制功能
+            const wechatIdElement = document.getElementById('wechat-id-copy');
+            const copyToast = document.getElementById('copy-toast');
+
+            if (wechatIdElement && copyToast) {
+                wechatIdElement.addEventListener('click', async () => {
+                    const wechatId = 'alz-ai';
+
+                    try {
+                        // 使用 Clipboard API 复制
+                        await navigator.clipboard.writeText(wechatId);
+
+                        // 显示提示
+                        copyToast.style.display = 'block';
+
+                        // 2秒后隐藏提示
+                        setTimeout(() => {
+                            copyToast.style.display = 'none';
+                        }, 2000);
+                    } catch (err) {
+                        // 降级方案：使用传统方法
+                        const textArea = document.createElement('textarea');
+                        textArea.value = wechatId;
+                        textArea.style.position = 'fixed';
+                        textArea.style.left = '-999999px';
+                        document.body.appendChild(textArea);
+                        textArea.select();
+
+                        try {
+                            document.execCommand('copy');
+                            copyToast.style.display = 'block';
+                            setTimeout(() => {
+                                copyToast.style.display = 'none';
+                            }, 2000);
+                        } catch (err2) {
+                            console.error('复制失败:', err2);
+                        }
+
+                        document.body.removeChild(textArea);
+                    }
+                });
+            }
+
+            // Magic Bento 边框发光效果
+            const cards = document.querySelectorAll('.stat-card, .service-card, .advantage-card, .pricing-card, .contact-box');
+
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const relativeX = (x / rect.width) * 100;
+                    const relativeY = (y / rect.height) * 100;
+
+                    card.style.setProperty('--glow-x', `${relativeX}%`);
+                    card.style.setProperty('--glow-y', `${relativeY}%`);
+                    card.style.setProperty('--glow-intensity', '1');
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    // 对于 contact-box 和 featured pricing-card，保持发光效果
+                    if (!card.classList.contains('contact-box') && !card.classList.contains('featured')) {
+                        card.style.setProperty('--glow-intensity', '0');
+                    }
+                });
+
+                // 点击涟漪效果
+                card.addEventListener('click', (e) => {
+                    // 如果点击的是链接或按钮，不阻止默认行为
+                    if (e.target.tagName === 'A' || e.target.closest('a')) {
+                        return;
+                    }
+
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    // 计算最大距离（到四个角的最远距离）
+                    const maxDistance = Math.max(
+                        Math.hypot(x, y),
+                        Math.hypot(x - rect.width, y),
+                        Math.hypot(x, y - rect.height),
+                        Math.hypot(x - rect.width, y - rect.height)
+                    );
+
+                    // 创建涟漪元素
+                    const ripple = document.createElement('div');
+                    ripple.style.cssText = `
+                        position: absolute;
+                        width: ${maxDistance * 2}px;
+                        height: ${maxDistance * 2}px;
+                        border-radius: 50%;
+                        background: radial-gradient(circle, rgba(16, 185, 129, 0.4) 0%, rgba(16, 185, 129, 0.2) 30%, transparent 70%);
+                        left: ${x - maxDistance}px;
+                        top: ${y - maxDistance}px;
+                        pointer-events: none;
+                        z-index: 1000;
+                        transform: scale(0);
+                        opacity: 1;
+                    `;
+
+                    card.appendChild(ripple);
+
+                    // 动画
+                    ripple.animate([
+                        { transform: 'scale(0)', opacity: 1 },
+                        { transform: 'scale(1)', opacity: 0 }
+                    ], {
+                        duration: 800,
+                        easing: 'ease-out'
+                    }).onfinish = () => ripple.remove();
+                });
+            });
         });
     </script>
 
